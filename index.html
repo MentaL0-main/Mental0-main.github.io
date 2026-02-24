@@ -5,16 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Miraly Ruziev | Elite Developer</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap');
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'JetBrains Mono', monospace;
-            background: #1a0000;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
             color: #fff;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120,119,198,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,119,198,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120,219,255,0.2) 0%, transparent 50%);
+            z-index: -1;
+            animation: float 20s ease-in-out infinite;
         }
         
         .container {
@@ -31,17 +47,21 @@
         .title {
             font-size: clamp(2.8rem, 8vw, 5rem);
             font-weight: 800;
-            background: linear-gradient(45deg, #ff0040, #ff4081);
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #f4c430);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 15px;
-            text-shadow: 0 0 30px rgba(255, 0, 64, 0.5);
+            text-shadow: 
+                0 0 30px rgba(255, 215, 0, 0.5),
+                0 0 60px rgba(255, 237, 78, 0.3);
         }
         
         .subtitle {
             font-size: clamp(1.2rem, 3vw, 1.8rem);
             font-weight: 700;
-            color: #ff4081;
+            background: linear-gradient(45deg, #c71585, #db7093);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 25px;
         }
         
@@ -57,30 +77,34 @@
             text-decoration: none;
             font-weight: 700;
             padding: 12px 22px;
-            background: rgba(255, 0, 64, 0.15);
-            border: 2px solid #ff0040;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 30px;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .contact-link:hover {
-            background: rgba(255, 0, 64, 0.3);
-            box-shadow: 0 0 25px rgba(255, 0, 64, 0.5);
-            transform: translateY(-2px);
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #ffd700;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            transform: translateY(-3px);
         }
         
         .section {
             margin: 70px 0;
             padding: 35px;
-            background: rgba(255, 0, 64, 0.08);
-            border: 1px solid rgba(255, 0, 64, 0.3);
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
         
         .section-title {
             font-size: 2rem;
             font-weight: 800;
-            background: linear-gradient(45deg, #ff0040, #ff4081);
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-align: center;
@@ -98,16 +122,20 @@
             font-weight: 700;
             font-size: 1rem;
             color: #fff;
-            border: 2px solid rgba(255, 0, 64, 0.4);
-            border-radius: 15px;
-            background: rgba(255, 0, 64, 0.1);
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
         }
         
         .stack-item:hover {
-            background: rgba(255, 0, 64, 0.25);
-            box-shadow: 0 10px 25px rgba(255, 0, 64, 0.3);
+            background: rgba(255, 215, 0, 0.15);
+            border-color: #ffd700;
+            box-shadow: 
+                0 15px 35px rgba(255, 215, 0, 0.2),
+                inset 0 0 20px rgba(255, 215, 0, 0.1);
             transform: translateY(-5px);
         }
         
@@ -120,17 +148,20 @@
         .project-card {
             height: 320px;
             cursor: pointer;
-            border-radius: 18px;
-            border: 2px solid rgba(255, 0, 64, 0.4);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
             overflow: hidden;
-            transition: all 0.4s ease;
-            background: linear-gradient(145deg, rgba(26,0,0,0.9), rgba(40,0,0,0.9));
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(15px);
         }
         
         .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(255, 0, 64, 0.4);
-            border-color: #ff4081;
+            transform: translateY(-10px);
+            border-color: #ffd700;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(255, 215, 0, 0.3);
         }
         
         .card-content {
@@ -144,12 +175,13 @@
         .card-image {
             width: 100%;
             height: 100px;
-            background: linear-gradient(45deg, #ff0040, #ff4081);
+            background: linear-gradient(135deg, #c71585, #db7093, #ffd700);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2.5rem;
+            box-shadow: 0 8px 20px rgba(199, 21, 133, 0.3);
         }
         
         .card-title {
@@ -159,7 +191,7 @@
         }
         
         .card-description {
-            color: #ff4081;
+            color: rgba(255, 255, 255, 0.9);
             font-size: 0.95rem;
             line-height: 1.5;
             flex: 1;
@@ -173,31 +205,38 @@
         .snake-title {
             font-size: 1.8rem;
             margin-bottom: 25px;
-            background: linear-gradient(45deg, #ff0040, #ff4081);
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
         #snake-game {
             display: inline-block;
-            background: rgba(0,0,0,0.9);
-            border: 3px solid #ff0040;
-            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            border-radius: 16px;
             padding: 20px;
-            box-shadow: 0 0 40px rgba(255, 0, 64, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
         
         #game-canvas {
             background: #000;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             display: block;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
         }
         
         .game-controls {
             margin-top: 12px;
             font-size: 0.9rem;
-            color: #ff4081;
+            color: #ffd700;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-20px) scale(1.02); }
         }
         
         @media (max-width: 768px) {
@@ -287,14 +326,13 @@
                 <canvas id="game-canvas" width="350" height="350"></canvas>
                 <div class="game-controls">
                     Click canvas → WASD/Arrows → Eat food!
-                    <span id="score" style="color: #fff; margin-left: 10px;">0</span>
+                    <span id="score" style="color: #ffd700; margin-left: 10px; font-weight: 700;">0</span>
                 </div>
             </div>
         </section>
     </div>
 
     <script>
-        // Super lightweight snake
         const canvas = document.getElementById('game-canvas');
         const ctx = canvas.getContext('2d');
         const scoreEl = document.getElementById('score');
@@ -312,13 +350,9 @@
             ctx.fillStyle = '#000';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // Snake
-            ctx.fillStyle = '#ff0040';
-            snake.forEach(s => {
-                ctx.fillRect(s.x * grid, s.y * grid, grid-1, grid-1);
-            });
+            ctx.fillStyle = '#ffd700';
+            snake.forEach(s => ctx.fillRect(s.x * grid, s.y * grid, grid-1, grid-1));
             
-            // Food
             ctx.fillStyle = '#00ff88';
             ctx.fillRect(food.x * grid, food.y * grid, grid-1, grid-1);
         }
@@ -373,7 +407,6 @@
         
         draw();
         
-        // Project clicks
         document.querySelectorAll('.project-card').forEach(card => {
             card.addEventListener('click', () => {
                 window.open(card.dataset.link, '_blank');
