@@ -3,99 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miraly Ruziev | Elite Software Developer</title>
+    <title>Miraly Ruziev | Elite Developer</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap');
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'JetBrains Mono', monospace;
-            background: radial-gradient(ellipse at center, #1a0000 0%, #000 70%);
+            background: #1a0000;
             color: #fff;
             min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
-        }
-        
-        #shader-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        
-        .glitch {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10;
-            opacity: 0.7;
         }
         
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 50px 25px;
-            position: relative;
-            z-index: 1;
+            padding: 40px 20px;
         }
         
         .header {
             text-align: center;
-            margin-bottom: 90px;
+            margin-bottom: 80px;
         }
         
         .title {
-            font-size: clamp(3rem, 9vw, 6.5rem);
+            font-size: clamp(2.8rem, 8vw, 5rem);
             font-weight: 800;
-            background: linear-gradient(45deg, #ff0040, #ff4081, #ff006e, #ff1a4d);
-            background-size: 400% 400%;
+            background: linear-gradient(45deg, #ff0040, #ff4081);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: glitch-flow 4s ease-in-out infinite;
-            text-shadow: 
-                0 0 40px rgba(255, 0, 64, 0.6),
-                0 0 80px rgba(255, 64, 129, 0.4);
-            margin-bottom: 25px;
-            letter-spacing: 3px;
-            position: relative;
-        }
-        
-        .title::before {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 2px;
-            z-index: -1;
-            color: rgba(255, 0, 64, 0.3);
-            animation: glitch-shift 2s infinite;
+            margin-bottom: 15px;
+            text-shadow: 0 0 30px rgba(255, 0, 64, 0.5);
         }
         
         .subtitle {
-            font-size: clamp(1.3rem, 3.5vw, 2rem);
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
             font-weight: 700;
-            background: linear-gradient(45deg, #ff4081, #ff006e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            opacity: 0.95;
-            margin-bottom: 20px;
+            color: #ff4081;
+            margin-bottom: 25px;
         }
         
         .contacts {
             display: flex;
             justify-content: center;
-            gap: 25px;
+            gap: 20px;
             flex-wrap: wrap;
         }
         
@@ -103,161 +56,106 @@
             color: #fff;
             text-decoration: none;
             font-weight: 700;
-            font-size: 1rem;
-            padding: 12px 24px;
+            padding: 12px 22px;
             background: rgba(255, 0, 64, 0.15);
-            border: 2px solid rgba(255, 0, 64, 0.4);
-            border-radius: 40px;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            overflow: hidden;
+            border: 2px solid #ff0040;
+            border-radius: 30px;
+            transition: all 0.3s ease;
         }
         
-        .contact-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s;
-        }
-        
-        .contact-link:hover::before { left: 100%; }
         .contact-link:hover {
-            background: rgba(255, 0, 64, 0.25);
-            box-shadow: 0 0 40px rgba(255, 0, 64, 0.6);
-            transform: translateY(-4px) scale(1.05);
-            border-color: #ff4081;
+            background: rgba(255, 0, 64, 0.3);
+            box-shadow: 0 0 25px rgba(255, 0, 64, 0.5);
+            transform: translateY(-2px);
         }
         
         .section {
-            margin: 90px 0;
-            padding: 45px;
-            background: rgba(255, 0, 64, 0.05);
-            border: 1px solid rgba(255, 0, 64, 0.2);
-            border-radius: 25px;
-            backdrop-filter: blur(15px);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(255,0,64,0.03) 90deg, transparent 180deg);
-            animation: rotate-field 20s linear infinite;
-            pointer-events: none;
+            margin: 70px 0;
+            padding: 35px;
+            background: rgba(255, 0, 64, 0.08);
+            border: 1px solid rgba(255, 0, 64, 0.3);
+            border-radius: 20px;
         }
         
         .section-title {
-            font-size: 2.3rem;
+            font-size: 2rem;
             font-weight: 800;
             background: linear-gradient(45deg, #ff0040, #ff4081);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-align: center;
-            margin-bottom: 45px;
-            position: relative;
+            margin-bottom: 35px;
         }
         
         .stack {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
         }
         
         .stack-item {
-            padding: 25px 20px;
+            padding: 20px;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #fff;
             border: 2px solid rgba(255, 0, 64, 0.4);
-            border-radius: 18px;
-            background: rgba(255, 0, 64, 0.08);
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            position: relative;
-            cursor: default;
+            border-radius: 15px;
+            background: rgba(255, 0, 64, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
         }
         
         .stack-item:hover {
-            background: rgba(255, 0, 64, 0.2);
-            box-shadow: 
-                0 15px 35px rgba(255, 0, 64, 0.4),
-                inset 0 0 20px rgba(255, 64, 129, 0.2);
-            transform: translateY(-8px) rotateX(10deg);
+            background: rgba(255, 0, 64, 0.25);
+            box-shadow: 0 10px 25px rgba(255, 0, 64, 0.3);
+            transform: translateY(-5px);
         }
         
         .projects {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 35px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
         }
         
         .project-card {
-            perspective: 1000px;
-            height: 380px;
+            height: 320px;
             cursor: pointer;
+            border-radius: 18px;
+            border: 2px solid rgba(255, 0, 64, 0.4);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: linear-gradient(145deg, rgba(26,0,0,0.9), rgba(40,0,0,0.9));
         }
         
-        .card-inner {
-            position: relative;
-            width: 100%;
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 0, 64, 0.4);
+            border-color: #ff4081;
+        }
+        
+        .card-content {
+            padding: 30px;
             height: 100%;
-            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            transform-style: preserve-3d;
-        }
-        
-        .project-card:hover .card-inner {
-            transform: rotateY(8deg) rotateX(4deg);
-        }
-        
-        .card-front {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 20px;
-            border: 2px solid rgba(255, 0, 64, 0.5);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.5),
-                0 0 40px rgba(255, 0, 64, 0.3);
-            background: linear-gradient(145deg, rgba(26,0,0,0.9), rgba(50,0,0,0.9));
-            padding: 35px;
             display: flex;
             flex-direction: column;
-            gap: 18px;
-            backdrop-filter: blur(12px);
+            gap: 15px;
         }
         
         .card-image {
             width: 100%;
-            height: 110px;
+            height: 100px;
             background: linear-gradient(45deg, #ff0040, #ff4081);
-            border-radius: 14px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card-image::before {
-            content: attr(data-icon);
-            animation: spectral-float 4s ease-in-out infinite;
-            filter: drop-shadow(0 0 25px rgba(255,255,255,0.4));
-            position: relative;
-            z-index: 2;
+            font-size: 2.5rem;
         }
         
         .card-title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 800;
             color: #fff;
-            margin-bottom: 8px;
         }
         
         .card-description {
@@ -267,15 +165,14 @@
             flex: 1;
         }
         
-        /* Snake Game */
         .snake-section {
-            margin-top: 120px;
+            margin-top: 100px;
             text-align: center;
         }
         
         .snake-title {
-            font-size: 2rem;
-            margin-bottom: 30px;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
             background: linear-gradient(45deg, #ff0040, #ff4081);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -283,75 +180,38 @@
         
         #snake-game {
             display: inline-block;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.9);
             border: 3px solid #ff0040;
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 0 50px rgba(255, 0, 64, 0.5);
+            box-shadow: 0 0 40px rgba(255, 0, 64, 0.4);
         }
         
         #game-canvas {
             background: #000;
-            border-radius: 10px;
-            display: block;
+            border-radius: 8px;
             cursor: pointer;
+            display: block;
         }
         
         .game-controls {
-            margin-top: 15px;
+            margin-top: 12px;
             font-size: 0.9rem;
             color: #ff4081;
         }
         
-        @keyframes glitch-flow {
-            0%, 100% { background-position: 0% 50%; }
-            25% { background-position: 100% 50%; }
-            50% { background-position: 100% 100%; }
-            75% { background-position: 0% 100%; }
-        }
-        
-        @keyframes glitch-shift {
-            0%, 100% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-        }
-        
-        @keyframes rotate-field {
-            to { transform: rotate(360deg); }
-        }
-        
-        @keyframes spectral-float {
-            0%, 100% { 
-                transform: translateY(0) scale(1) rotate(0deg); 
-                filter: hue-rotate(0deg) brightness(1);
-            }
-            33% { 
-                transform: translateY(-8px) scale(1.1) rotate(2deg); 
-                filter: hue-rotate(60deg) brightness(1.2);
-            }
-            66% { 
-                transform: translateY(-12px) scale(1.05) rotate(-2deg); 
-                filter: hue-rotate(120deg) brightness(1.1);
-            }
-        }
-        
         @media (max-width: 768px) {
             .contacts { flex-direction: column; align-items: center; }
+            .stack { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
             .projects { grid-template-columns: 1fr; }
-            .stack { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
         }
     </style>
 </head>
 <body>
-    <canvas id="shader-bg"></canvas>
-    <canvas class="glitch" id="glitch"></canvas>
-    
     <div class="container">
         <header class="header">
-            <h1 class="title" data-text="Miraly Ruziev">Miraly Ruziev</h1>
-            <p class="subtitle">Elite Low-Level Developer | Game Engine Architect | Cybersecurity Expert</p>
+            <h1 class="title">Miraly Ruziev</h1>
+            <p class="subtitle">Elite Low-Level Developer | Game Engine Architect</p>
             <div class="contacts">
                 <a href="mailto:obilev0000@gmail.com" class="contact-link">📧 obilev0000@gmail.com</a>
                 <a href="https://github.com/mental0-main" class="contact-link" target="_blank">🐙 GitHub</a>
@@ -380,49 +240,41 @@
             <h2 class="section-title">Projects</h2>
             <div class="projects">
                 <div class="project-card" data-link="https://github.com/mental0-main/mkit">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="card-image" data-icon="🎮"></div>
-                            <h3 class="card-title">Game Engine</h3>
-                            <div class="card-description">
-                                Proprietary game engine with OpenGL, shaders, physics and networking support
-                            </div>
+                    <div class="card-content">
+                        <div class="card-image">🎮</div>
+                        <h3 class="card-title">Game Engine</h3>
+                        <div class="card-description">
+                            Proprietary game engine with OpenGL, shaders, physics and networking
                         </div>
                     </div>
                 </div>
                 
                 <div class="project-card" data-link="https://github.com/mental0-main/snake">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="card-image" data-icon="🐍"></div>
-                            <h3 class="card-title">Snake Game</h3>
-                            <div class="card-description">
-                                Classic snake game in C++ with OpenGL rendering and advanced graphics effects
-                            </div>
+                    <div class="card-content">
+                        <div class="card-image">🐍</div>
+                        <h3 class="card-title">Snake Game</h3>
+                        <div class="card-description">
+                            Classic snake in C++ with OpenGL rendering and advanced graphics
                         </div>
                     </div>
                 </div>
                 
                 <div class="project-card" data-link="https://github.com/mental0-main/bruteforcer">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="card-image" data-icon="🔓"></div>
-                            <h3 class="card-title">Bruteforcer</h3>
-                            <div class="card-description">
-                                High-performance hash bruteforce tool with SIMD optimizations
-                            </div>
+                    <div class="card-content">
+                        <div class="card-image">🔓</div>
+                        <h3 class="card-title">Bruteforcer</h3>
+                        <div class="card-description">
+                            High-performance hash bruteforce tool with SIMD optimizations
                         </div>
                     </div>
                 </div>
                 
                 <div class="project-card" data-link="https://github.com/mental0-main/Stone-Chat">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="card-image" data-icon="💬"></div>
-                            <h3 class="card-title">Stone Chat</h3>
-                            <div class="card-description">
-                                Multithreading console chat server with ultra performance networking
-                            </div>
+                    <div class="card-content">
+                        <div class="card-image">💬</div>
+                        <h3 class="card-title">Stone Chat</h3>
+                        <div class="card-description">
+                            Multithreading console chat with ultra performance networking
                         </div>
                     </div>
                 </div>
@@ -432,179 +284,100 @@
         <section class="snake-section">
             <h2 class="snake-title">Live Demo: Snake Game</h2>
             <div id="snake-game">
-                <canvas id="game-canvas" width="400" height="400"></canvas>
+                <canvas id="game-canvas" width="350" height="350"></canvas>
                 <div class="game-controls">
-                    Click to play | WASD / Arrows | Score: <span id="score">0</span>
+                    Click canvas → WASD/Arrows → Eat food!
+                    <span id="score" style="color: #fff; margin-left: 10px;">0</span>
                 </div>
             </div>
         </section>
     </div>
 
     <script>
-        // Lightweight shader background
-        const shaderCanvas = document.getElementById('shader-bg');
-        const gl = shaderCanvas.getContext('webgl');
-        shaderCanvas.width = window.innerWidth;
-        shaderCanvas.height = window.innerHeight;
-        
-        if (gl) {
-            gl.viewport(0, 0, shaderCanvas.width, shaderCanvas.height);
-            
-            const vsSource = `attribute vec2 position; void main() { gl_Position = vec4(position, 0, 1); }`;
-            const fsSource = `
-                precision mediump float;
-                uniform float time;
-                uniform vec2 resolution;
-                void main() {
-                    vec2 uv = gl_FragCoord.xy / resolution.xy;
-                    float d = length(uv - 0.5);
-                    float pulse = sin(time * 2.0 + d * 10.0) * 0.5 + 0.5;
-                    vec3 col = mix(vec3(0.1,0,0), vec3(1,0.1,0.2), pulse * 0.3);
-                    gl_FragColor = vec4(col, 0.4);
-                }
-            `;
-            
-            const vs = gl.createShader(gl.VERTEX_SHADER);
-            gl.shaderSource(vs, vsSource);
-            gl.compileShader(vs);
-            
-            const fs = gl.createShader(gl.FRAGMENT_SHADER);
-            gl.shaderSource(fs, fsSource);
-            gl.compileShader(fs);
-            
-            const program = gl.createProgram();
-            gl.attachShader(program, vs);
-            gl.attachShader(program, fs);
-            gl.linkProgram(program);
-            gl.useProgram(program);
-            
-            const positionBuffer = gl.createBuffer();
-            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
-            
-            const positionLoc = gl.getAttribLocation(program, 'position');
-            gl.enableVertexAttribArray(positionLoc);
-            gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
-            
-            const timeLoc = gl.getUniformLocation(program, 'time');
-            const resLoc = gl.getUniformLocation(program, 'resolution');
-            
-            let time = 0;
-            function render() {
-                time += 0.016;
-                gl.uniform1f(timeLoc, time);
-                gl.uniform2f(resLoc, shaderCanvas.width, shaderCanvas.height);
-                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-                requestAnimationFrame(render);
-            }
-            render();
-        }
-        
-        // Project links
-        document.querySelectorAll('.project-card').forEach((card, i) => {
-            card.style.animationDelay = `${i * 0.1}s`;
-            card.addEventListener('click', () => {
-                window.open(card.dataset.link, '_blank');
-            });
-        });
-        
-        // Snake Game
+        // Super lightweight snake
         const canvas = document.getElementById('game-canvas');
         const ctx = canvas.getContext('2d');
         const scoreEl = document.getElementById('score');
         
-        const grid = 20;
+        const grid = 17.5;
         const tileCount = canvas.width / grid;
         let snake = [{x: 10, y: 10}];
-        let food = {};
+        let food = {x: 15, y: 15};
         let dx = 0, dy = 0;
         let score = 0;
         let gameRunning = false;
+        let gameLoop;
         
-        function randomFood() {
-            food = {
-                x: Math.floor(Math.random() * tileCount),
-                y: Math.floor(Math.random() * tileCount)
-            };
-        }
-        
-        function drawGame() {
-            // Clear
+        function draw() {
             ctx.fillStyle = '#000';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
             // Snake
             ctx.fillStyle = '#ff0040';
-            ctx.shadowColor = '#ff4081';
-            ctx.shadowBlur = 15;
-            for (let segment of snake) {
-                ctx.fillRect(segment.x * grid, segment.y * grid, grid - 2, grid - 2);
-            }
-            ctx.shadowBlur = 0;
+            snake.forEach(s => {
+                ctx.fillRect(s.x * grid, s.y * grid, grid-1, grid-1);
+            });
             
             // Food
             ctx.fillStyle = '#00ff88';
-            ctx.shadowColor = '#00ff88';
-            ctx.shadowBlur = 20;
-            ctx.fillRect(food.x * grid, food.y * grid, grid - 2, grid - 2);
-            ctx.shadowBlur = 0;
+            ctx.fillRect(food.x * grid, food.y * grid, grid-1, grid-1);
         }
         
         function update() {
-            if (!gameRunning) return;
-            
             const head = {x: snake[0].x + dx, y: snake[0].y + dy};
             
-            // Collision
             if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount || 
                 snake.some(s => s.x === head.x && s.y === head.y)) {
                 gameRunning = false;
+                clearInterval(gameLoop);
                 snake = [{x: 10, y: 10}];
                 dx = dy = 0;
                 score = 0;
                 scoreEl.textContent = score;
+                draw();
                 return;
             }
             
             snake.unshift(head);
             
-            // Eat food
             if (head.x === food.x && head.y === food.y) {
                 score++;
                 scoreEl.textContent = score;
-                randomFood();
+                food = {
+                    x: Math.floor(Math.random() * tileCount),
+                    y: Math.floor(Math.random() * tileCount)
+                };
             } else {
                 snake.pop();
             }
             
-            drawGame();
+            draw();
         }
         
         canvas.addEventListener('click', () => {
             if (!gameRunning) {
                 gameRunning = true;
-                randomFood();
-                requestAnimationFrame(update);
+                gameLoop = setInterval(update, 150);
             }
         });
         
         document.addEventListener('keydown', e => {
-            switch(e.key) {
-                case 'ArrowUp': case 'w': case 'W': if (dy !== 1) {dx=0; dy=-1;} break;
-                case 'ArrowDown': case 's': case 'S': if (dy !== -1) {dx=0; dy=1;} break;
-                case 'ArrowLeft': case 'a': case 'A': if (dx !== 1) {dx=-1; dy=0;} break;
-                case 'ArrowRight': case 'd': case 'D': if (dx !== -1) {dx=1; dy=0;} break;
+            if (!gameRunning) return;
+            switch(e.key.toLowerCase()) {
+                case 'arrowup': case 'w': if (dy !== 1) {dx=0; dy=-1;} break;
+                case 'arrowdown': case 's': if (dy !== -1) {dx=0; dy=1;} break;
+                case 'arrowleft': case 'a': if (dx !== 1) {dx=-1; dy=0;} break;
+                case 'arrowright': case 'd': if (dx !== -1) {dx=1; dy=0;} break;
             }
         });
         
-        randomFood();
-        drawGame();
+        draw();
         
-        // Responsive
-        window.addEventListener('resize', () => {
-            shaderCanvas.width = window.innerWidth;
-            shaderCanvas.height = window.innerHeight;
-            if (gl) gl.viewport(0, 0, shaderCanvas.width, shaderCanvas.height);
+        // Project clicks
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', () => {
+                window.open(card.dataset.link, '_blank');
+            });
         });
     </script>
 </body>
