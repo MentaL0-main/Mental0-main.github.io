@@ -11,11 +11,51 @@
         
         body {
             font-family: 'JetBrains Mono', monospace;
-            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
             color: #fff;
             min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
+            transition: all 0.5s ease;
+        }
+        
+        /* Theme variables */
+        :root {
+            --bg-primary: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            --bg-secondary: rgba(255, 255, 255, 0.05);
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --accent-gold: #ffd700;
+            --accent-purple: #c71585;
+            --text-primary: #fff;
+            --text-secondary: rgba(255, 255, 255, 0.9);
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+        
+        [data-theme="light"] {
+            --bg-primary: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 50%, #e8f4fd 100%);
+            --bg-secondary: rgba(255, 255, 255, 0.85);
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --accent-gold: #d4a017;
+            --accent-purple: #a855f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        [data-theme="neon"] {
+            --bg-primary: #000;
+            --bg-secondary: rgba(255, 0, 150, 0.1);
+            --glass-bg: rgba(0, 255, 255, 0.15);
+            --glass-border: rgba(0, 255, 255, 0.3);
+            --accent-gold: #00ffff;
+            --accent-purple: #ff00ff;
+            --text-primary: #fff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --shadow: rgba(0, 255, 255, 0.3);
+        }
+        
+        body {
+            background: var(--bg-primary);
         }
         
         body::before {
@@ -26,43 +66,64 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(120,119,198,0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255,119,198,0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120,219,255,0.2) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(120,119,198,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,119,198,0.15) 0%, transparent 50%);
             z-index: -1;
-            animation: float 20s ease-in-out infinite;
+            animation: float 25s ease-in-out infinite;
+            opacity: 0.5;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 8px 16px;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-weight: 700;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 20px var(--shadow);
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 60px 20px 40px;
+            position: relative;
+            z-index: 1;
         }
         
         .header {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 90px;
         }
         
         .title {
-            font-size: clamp(2.8rem, 8vw, 5rem);
+            font-size: clamp(2.8rem, 8vw, 5.5rem);
             font-weight: 800;
-            background: linear-gradient(45deg, #ffd700, #ffed4e, #f4c430);
+            background: linear-gradient(45deg, var(--accent-gold), #ffed4e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-            text-shadow: 
-                0 0 30px rgba(255, 215, 0, 0.5),
-                0 0 60px rgba(255, 237, 78, 0.3);
+            margin-bottom: 18px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
         }
         
         .subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-size: clamp(1.2rem, 3vw, 1.9rem);
             font-weight: 700;
-            background: linear-gradient(45deg, #c71585, #db7093);
+            background: linear-gradient(45deg, var(--accent-purple), #db7093);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         
         .contacts {
@@ -73,180 +134,181 @@
         }
         
         .contact-link {
-            color: #fff;
+            color: var(--text-primary);
             text-decoration: none;
             font-weight: 700;
-            padding: 12px 22px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 14px 24px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 35px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.95rem;
         }
         
         .contact-link:hover {
             background: rgba(255, 215, 0, 0.2);
-            border-color: #ffd700;
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
-            transform: translateY(-3px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 12px 35px rgba(255, 215, 0, 0.25);
+            transform: translateY(-4px);
         }
         
         .section {
-            margin: 70px 0;
-            padding: 35px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin: 80px 0;
+            padding: 45px;
+            background: var(--bg-secondary);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            box-shadow: 0 25px 50px var(--shadow);
         }
         
         .section-title {
-            font-size: 2rem;
+            font-size: 2.3rem;
             font-weight: 800;
-            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            background: linear-gradient(45deg, var(--accent-gold), #ffed4e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 40px;
         }
         
         .stack {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 20px;
         }
         
         .stack-item {
-            padding: 20px;
+            padding: 22px;
             font-weight: 700;
-            font-size: 1rem;
-            color: #fff;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 16px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
         }
         
         .stack-item:hover {
-            background: rgba(255, 215, 0, 0.15);
-            border-color: #ffd700;
-            box-shadow: 
-                0 15px 35px rgba(255, 215, 0, 0.2),
-                inset 0 0 20px rgba(255, 215, 0, 0.1);
-            transform: translateY(-5px);
+            background: rgba(255, 215, 0, 0.18);
+            border-color: var(--accent-gold);
+            box-shadow: 0 18px 40px rgba(255, 215, 0, 0.2);
+            transform: translateY(-6px);
         }
         
         .projects {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 35px;
         }
         
         .project-card {
-            height: 320px;
+            height: 340px;
             cursor: pointer;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(15px);
+            transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--glass-bg);
+            backdrop-filter: blur(18px);
         }
         
         .project-card:hover {
-            transform: translateY(-10px);
-            border-color: #ffd700;
-            box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.4),
-                0 0 40px rgba(255, 215, 0, 0.3);
+            transform: translateY(-12px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 30px 60px var(--shadow), 0 0 45px rgba(255, 215, 0, 0.25);
         }
         
         .card-content {
-            padding: 30px;
+            padding: 35px;
             height: 100%;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 18px;
         }
         
         .card-image {
             width: 100%;
-            height: 100px;
-            background: linear-gradient(135deg, #c71585, #db7093, #ffd700);
-            border-radius: 12px;
+            height: 110px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-gold));
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            box-shadow: 0 8px 20px rgba(199, 21, 133, 0.3);
+            font-size: 2.8rem;
+            box-shadow: 0 10px 25px rgba(199, 21, 133, 0.3);
         }
         
         .card-title {
-            font-size: 1.4rem;
+            font-size: 1.45rem;
             font-weight: 800;
-            color: #fff;
+            color: var(--text-primary);
         }
         
         .card-description {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.95rem;
-            line-height: 1.5;
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+            line-height: 1.55;
             flex: 1;
         }
         
         .snake-section {
-            margin-top: 100px;
+            margin-top: 120px;
             text-align: center;
         }
         
         .snake-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, var(--accent-gold), #ffed4e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
         #snake-game {
             display: inline-block;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px);
-            border: 2px solid rgba(255, 215, 0, 0.5);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.6);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 25px 50px var(--shadow);
         }
         
         #game-canvas {
             background: #000;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             display: block;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.4);
         }
         
         .game-controls {
-            margin-top: 12px;
-            font-size: 0.9rem;
-            color: #ffd700;
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: var(--accent-gold);
+            font-weight: 600;
         }
         
         @keyframes float {
             0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-20px) scale(1.02); }
+            50% { transform: translateY(-15px) scale(1.015); }
         }
         
         @media (max-width: 768px) {
-            .contacts { flex-direction: column; align-items: center; }
-            .stack { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+            .contacts { flex-direction: column; align-items: center; gap: 15px; }
+            .stack { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
             .projects { grid-template-columns: 1fr; }
+            .container { padding: 50px 15px 30px; }
         }
     </style>
 </head>
-<body>
+<body data-theme="dark">
+    <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+    
     <div class="container">
         <header class="header">
             <h1 class="title">Miraly Ruziev</h1>
@@ -282,9 +344,7 @@
                     <div class="card-content">
                         <div class="card-image">🎮</div>
                         <h3 class="card-title">Game Engine</h3>
-                        <div class="card-description">
-                            Proprietary game engine with OpenGL, shaders, physics and networking
-                        </div>
+                        <div class="card-description">Proprietary game engine with OpenGL, shaders, physics and networking</div>
                     </div>
                 </div>
                 
@@ -292,19 +352,15 @@
                     <div class="card-content">
                         <div class="card-image">🐍</div>
                         <h3 class="card-title">Snake Game</h3>
-                        <div class="card-description">
-                            Classic snake in C++ with OpenGL rendering and advanced graphics
-                        </div>
+                        <div class="card-description">Classic snake in C++ with OpenGL rendering and advanced graphics</div>
                     </div>
                 </div>
                 
                 <div class="project-card" data-link="https://github.com/mental0-main/bruteforcer">
                     <div class="card-content">
-                        <div class="card-image">🔓</div>
+                        <div class="card-image">🔐</div>
                         <h3 class="card-title">Bruteforcer</h3>
-                        <div class="card-description">
-                            High-performance hash bruteforce tool with SIMD optimizations
-                        </div>
+                        <div class="card-description">High-performance hash bruteforce tool with SIMD optimizations</div>
                     </div>
                 </div>
                 
@@ -312,9 +368,103 @@
                     <div class="card-content">
                         <div class="card-image">💬</div>
                         <h3 class="card-title">Stone Chat</h3>
-                        <div class="card-description">
-                            Multithreading console chat with ultra performance networking
-                        </div>
+                        <div class="card-description">Multithreading console chat with ultra performance networking</div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-link="https://github.com/mental0-main/findit">
+                    <div class="card-content">
+                        <div class="card-image">🧱</div>
+                        <h3 class="card-title">Voxel Engine</h3>
+                        <div class="card-description">Simple voxel engine, render 16x16x16 voxels - 60 fps stable</div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-link="https://github.com/mental0-main/mentalos">
+                    <div class="card-content">
+                        <div class="card-image">💻</div>
+                        <h3 class="card-title">Operating System</h3>
+                        <div class="card-description">Basic OS, written in Assembly/C/C++</div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-link="https://github.com/mental0-main/guess-number">
+                    <div class="card-content">
+                        <div class="card-image">🎲</div>
+                        <h3 class="card-title">Guess Number</h3>
+                        <div class="card-description">Game "Guess Number", written in Assembly</div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-link="https://github.com/mental0-main/flame-world">
+                    <div class="card-content">
+                        <div class="card-image">🔥</div>
+                        <h3 class="card-title">Flame World</h3>
+                        <div class="card-description">Test game, written on C++ and OpenGL 3.3</div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-link="https://github.com/mental0-main/vulnscanner">
+                    <div class="card-content">
+                        <div class="card-image">🛡️</div>
+                        <h3 class="card-title">Vulnscanner</h3>
+                        <div class="card-description">Scanner of open ports and XSS, written in Python</div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-link="https://github.com/mental0-main/mislo">
+                    <div class="card-content">
+                        <div class="card-image">⚙️</div>
+                        <h3 class="card-title">Mislo Interpreter</h3>
+                        <div class="card-description">Mislo language's interpreter</div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-link="https://github.com/mental0-main/memory-manager">
+                    <div class="card-content">
+                        <div class="card-image">🧠</div>
+                        <h3 class="card-title">Memory Manager</h3>
+                        <div class="card-description">Memory control system in C</div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-link="https://github.com/mental0-main/list">
+                    <div class="card-content">
+                        <div class="card-image">📋</div>
+                        <h3 class="card-title">Custom List</h3>
+                        <div class="card-description">Data structure 'List', written in C and pointers</div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-link="https://github.com/mental0-main/raycasting">
+                    <div class="card-content">
+                        <div class="card-image">🎯</div>
+                        <h3 class="card-title">Raycasting</h3>
+                        <div class="card-description">Pseudo 3D game, using raycast algorithm</div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-link="https://github.com/mental0-main/keylogger">
+                    <div class="card-content">
+                        <div class="card-image">⌨️</div>
+                        <h3 class="card-title">Keylogger</h3>
+                        <div class="card-description">Crossplatform key capture program</div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-link="https://github.com/mental0-main/pong">
+                    <div class="card-content">
+                        <div class="card-image">🏓</div>
+                        <h3 class="card-title">Pong</h3>
+                        <div class="card-description">Pong game for 2 players or vs bot</div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-link="https://github.com/mental0-main/system-monitor">
+                    <div class="card-content">
+                        <div class="card-image">📊</div>
+                        <h3 class="card-title">Linux Monitor</h3>
+                        <div class="card-description">CLI utility for monitoring CPU/Disk/Memory usage</div>
                     </div>
                 </div>
             </div>
@@ -326,15 +476,28 @@
                 <canvas id="game-canvas" width="350" height="350"></canvas>
                 <div class="game-controls">
                     Click canvas → WASD/Arrows → Eat food!
-                    <span id="score" style="color: #ffd700; margin-left: 10px; font-weight: 700;">0</span>
+                    <span id="score" style="color: var(--accent-gold); margin-left: 10px; font-weight: 700;">0</span>
                 </div>
             </div>
         </section>
     </div>
 
     <script>
+        // Theme toggle
+        const themes = ['dark', 'light', 'neon'];
+        let currentTheme = 0;
+        
+        function toggleTheme() {
+            currentTheme = (currentTheme + 1) % themes.length;
+            document.body.setAttribute('data-theme', themes[currentTheme]);
+            document.querySelector('.theme-toggle').textContent = 
+                themes[currentTheme] === 'dark' ? '🌙 Dark' :
+                themes[currentTheme] === 'light' ? '☀️ Light' : '✨ Neon';
+        }
+        
+        // Snake game (optimized)
         const canvas = document.getElementById('game-canvas');
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d', { alpha: true });
         const scoreEl = document.getElementById('score');
         
         const grid = 17.5;
@@ -358,6 +521,8 @@
         }
         
         function update() {
+            if (!gameRunning) return;
+            
             const head = {x: snake[0].x + dx, y: snake[0].y + dy};
             
             if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount || 
@@ -397,20 +562,18 @@
         
         document.addEventListener('keydown', e => {
             if (!gameRunning) return;
-            switch(e.key.toLowerCase()) {
-                case 'arrowup': case 'w': if (dy !== 1) {dx=0; dy=-1;} break;
-                case 'arrowdown': case 's': if (dy !== -1) {dx=0; dy=1;} break;
-                case 'arrowleft': case 'a': if (dx !== 1) {dx=-1; dy=0;} break;
-                case 'arrowright': case 'd': if (dx !== -1) {dx=1; dy=0;} break;
-            }
+            const key = e.key.toLowerCase();
+            if (key === 'arrowup' || key === 'w') { if (dy !== 1) {dx=0; dy=-1;} }
+            else if (key === 'arrowdown' || key === 's') { if (dy !== -1) {dx=0; dy=1;} }
+            else if (key === 'arrowleft' || key === 'a') { if (dx !== 1) {dx=-1; dy=0;} }
+            else if (key === 'arrowright' || key === 'd') { if (dx !== -1) {dx=1; dy=0;} }
         });
         
         draw();
         
+        // Project clicks
         document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('click', () => {
-                window.open(card.dataset.link, '_blank');
-            });
+            card.addEventListener('click', () => window.open(card.dataset.link, '_blank'));
         });
     </script>
 </body>
