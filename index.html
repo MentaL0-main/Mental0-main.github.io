@@ -214,7 +214,7 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1 class="title">ПТО ТДЬР</h1>
+            <h1 class="title">Miraly Ruziev</h1>
             <p class="subtitle">Software Developer | Game Engine | Low-Level</p>
         </header>
         
@@ -227,6 +227,9 @@
             <div class="stack-item">Git</div>
             <div class="stack-item">Cybersecurity</div>
             <div class="stack-item">Python</div>
+            <div class="stack-item">SDL</div>
+            <div class="stack-item">C</div>
+            <div class="stack-item">Java Script</div>
         </section>
         
         <section class="projects">
@@ -237,7 +240,7 @@
                         <h3 class="card-title">Game Engine</h3>
                         <div class="card-suit">♥</div>
                         <div class="card-description">
-                            Собственный игровой движок с поддержкой OpenGL, шейдеров и физики
+                            Proprietary game engine with OpenGL, shaders, and physics support
                         </div>
                     </div>
                 </div>
@@ -250,7 +253,7 @@
                         <h3 class="card-title">Snake Game</h3>
                         <div class="card-suit">♦</div>
                         <div class="card-description">
-                            Классическая змейка на C++ с OpenGL и продвинутой графикой
+                            A classic snake game in C++ with OpenGL and advanced graphics.
                         </div>
                     </div>
                 </div>
@@ -260,10 +263,10 @@
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="card-image"></div>
-                        <h3 class="card-title">Reverse Engineering</h3>
+                        <h3 class="card-title">bruteforcer</h3>
                         <div class="card-suit">♣</div>
                         <div class="card-description">
-                            Инструменты для реверс-инжиниринга и анализа бинарников
+                            Tool for bruteforce hash
                         </div>
                     </div>
                 </div>
@@ -273,10 +276,10 @@
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="card-image"></div>
-                        <h3 class="card-title">Network Scanner</h3>
+                        <h3 class="card-title">Faster Chat</h3>
                         <div class="card-suit">♠</div>
                         <div class="card-description">
-                            Сканер сети с поддержкой различных протоколов
+                            Multithreading console chat. Ultra perfomance!
                         </div>
                     </div>
                 </div>
@@ -287,12 +290,11 @@
     <script>
         document.querySelectorAll('.project-card').forEach(card => {
             card.addEventListener('click', function() {
-                // Замени на реальные ссылки на твои GitHub репозитории
                 const links = {
-                    'Game Engine': 'https://github.com/mental0-main/game-engine',
-                    'Snake Game': 'https://github.com/mental0-main/snake-game',
-                    'Reverse Engineering': 'https://github.com/mental0-main/reverse-tools',
-                    'Network Scanner': 'https://github.com/mental0-main/network-scanner'
+                    'Game Engine': 'https://github.com/mental0-main/mkit',
+                    'Snake Game': 'https://github.com/mental0-main/snake',
+                    'Bruteforcer': 'https://github.com/mental0-main/bruteforcer',
+                    'Stone Chat': 'https://github.com/mental0-main/Stone-Chat'
                 };
                 
                 const title = this.querySelector('.card-title').textContent;
