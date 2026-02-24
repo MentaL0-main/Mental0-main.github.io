@@ -1,1 +1,277 @@
-in develop.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miraly Ruziev - Low-Level Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #ff0040;
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .title {
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            text-shadow: 0 0 20px #ff0040;
+            margin-bottom: 1rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #ff0040, 0 0 30px #ff0040; }
+            to { text-shadow: 0 0 30px #ff0040, 0 0 40px #ff0040, 0 0 50px #ff0040; }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            letter-spacing: 0.1em;
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(255, 0, 64, 0.1);
+            border: 1px solid #ff0040;
+            border-radius: 10px;
+        }
+
+        .tech {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #ff0040;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .tech:hover {
+            background: #ff0040;
+            color: #000;
+            box-shadow: 0 0 20px #ff0040;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            position: relative;
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border: 2px solid #ff0040;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            height: 400px;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 0, 64, 0.4);
+            border-color: #fff;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 64, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .suit {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2rem;
+            opacity: 0.3;
+            z-index: 2;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background: #222;
+            border-bottom: 1px solid #ff0040;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #666;
+            position: relative;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .card-description {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .card:hover .card-description {
+            opacity: 0;
+        }
+
+        .tooltip {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: #ff0040;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid #ff0040;
+        }
+
+        .card:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-10px);
+        }
+
+        .github-link {
+            position: absolute;
+            bottom: 1rem;
+            right: 1.5rem;
+            color: #ff0040;
+            font-size: 1.1rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .github-link {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Miraly Ruziev</h1>
+            <p class="subtitle">Low-Level Developer | Security Researcher</p>
+        </div>
+
+        <div class="tech-stack">
+            <div class="tech">ASM (NASM)</div>
+            <div class="tech">C</div>
+            <div class="tech">C++</div>
+            <div class="tech">OpenGL</div>
+            <div class="tech">JavaScript</div>
+            <div class="tech">Python</div>
+            <div class="tech">Linux</div>
+            <div class="tech">QEMU</div>
+            <div class="tech">Docker</div>
+            <div class="tech">CMake</div>
+        </div>
+
+        <div class="projects-grid">
+            <a href="https://github.com/MentaL0-main/mentalos" class="card" target="_blank">
+                <div class="suit">♥</div>
+                <div class="card-image">[MENTALOS SCREENSHOT]</div>
+                <div class="card-content">
+                    <div class="card-title">MentalOS</div>
+                    <div class="card-description">Graphics-First Operating System</div>
+                </div>
+                <div class="tooltip">VGA Mode 13h bootloader → VESA → C++ Kernel</div>
+                <div class="github-link">→ GitHub</div>
+            </a>
+
+            <a href="https://github.com/MentaL0-main/guess-number" class="card" target="_blank">
+                <div class="suit">♦</div>
+                <div class="card-image">[GUESS NUMBER SCREENSHOT]</div>
+                <div class="card-content">
+                    <div class="card-title">Guess Number</div>
+                    <div class="card-description">NetWide Assembly Game</div>
+                </div>
+                <div class="tooltip">Pure ASM • x86-64 • 7 attempts hot/cold hints</div>
+                <div class="github-link">→ GitHub</div>
+            </a>
+
+            <a href="#" class="card" target="_blank">
+                <div class="suit">♠</div>
+                <div class="card-image">[PROJECT 3 SCREENSHOT]</div>
+                <div class="card-content">
+                    <div class="card-title">Project 3</div>
+                    <div class="card-description">Coming Soon</div>
+                </div>
+                <div class="tooltip">Low-Level Security Research</div>
+                <div class="github-link">→ GitHub</div>
+            </a>
+
+            <a href="#" class="card" target="_blank">
+                <div class="suit">♣</div>
+                <div class="card-image">[PROJECT 4 SCREENSHOT]</div>
+                <div class="card-content">
+                    <div class="card-title">Project 4</div>
+                    <div class="card-description">Coming Soon</div>
+                </div>
+                <div class="tooltip">Custom Systems Programming</div>
+                <div class="github-link">→ GitHub</div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
